@@ -53,6 +53,7 @@
       <DependentUpon>Cronos.cs</DependentUpon>
     </Compile>
     <Compile Include="dal\sqlDalOperations.cs" />
+    <Compile Include="dto\ProcessCheckDto.cs" />
     <Compile Include="dto\HealthCheckDto.cs" />
     <Compile Include="dto\LogDto.cs" />
     <Compile Include="dto\RichText.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="service\cronosService.cs" />
     <Compile Include="service\httpRequests.cs" />
+    <Compile Include="service\processService.cs" />
     <Compile Include="service\sqlService.cs" />
     <Compile Include="service\TextAuxiliaryService.cs" />
     <EmbeddedResource Include="Cronos.resx">

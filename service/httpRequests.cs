@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Cronos.dto;
+using Cronos.dal;
 
 namespace Cronos.service
 {
@@ -26,18 +28,39 @@ namespace Cronos.service
             return (HttpWebResponse)request.GetResponse();
         }
 
-        public static Boolean GetBooleanResponse(string uri)
+        public static Boolean GetHealthCheckBooleanResponse(HealthCheckDto healthCheck)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            LogDto newLog = new LogDto();
+            newLog.execId = healthCheck.id;
+            newLog.type = 1;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(healthCheck.system_uri);
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             request.Timeout = 1000;
 
-            HttpWebResponse newResponse = (HttpWebResponse)request.GetResponse();
-            //wRespStatusCode = newResponse.StatusCode;
+            try
+            {
+                HttpWebResponse newResponse = (HttpWebResponse)request.GetResponse();
+                newLog.httpResult = (int)newResponse.StatusCode;
 
+                using (var reader = new StreamReader(newResponse.GetResponseStream()))
+                {
+                    newLog.result = reader.ReadToEnd();
+                }
 
+                // newLog.result = newResponse.
+                sqlDalOperations.saveLog(newLog);
+                return (newResponse.StatusCode.ToString() == "OK");
+            }
+            catch (Exception ex)
+            {
+                newLog.httpResult = 408;
+                newLog.result = ex.Message;
+                sqlDalOperations.saveLog(newLog);
+            }
 
-            return (newResponse.StatusCode.ToString() == "OK");
+            return false;
+
         }
     }
 }

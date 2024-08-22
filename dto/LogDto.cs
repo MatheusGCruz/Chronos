@@ -11,6 +11,7 @@ namespace Cronos.dto
         public int id { get; set; }
         public int type { get; set; }
         public int execId { get; set; }
+        public int httpResult { get; set; }
         public string result { get; set; }
         public DateTime loggedAt { get; set; }
 

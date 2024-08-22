@@ -78,6 +78,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(177, 346);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // label1
             // 
@@ -88,7 +89,7 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Health Checks";
             // 
-            // Cronos
+            // Chronos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,7 +100,7 @@
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.checkBox1);
-            this.Name = "Cronos";
+            this.Name = "Chronos";
             this.Text = "Cronos";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -47,12 +47,15 @@ namespace Cronos.service
 
 
         public static List<RichText> healthChecks(){
-
-            List<RichText> returnString = new List<RichText>();           
-                
+            List<RichText> returnString = new List<RichText>();        
             returnString = sqlService.getHealthChecks();
+            return returnString;
+        }
 
-
+        public static List<RichText> processChecks()
+        {
+            List<RichText> returnString = new List<RichText>();
+            returnString = sqlService.getProcessChecks();
             return returnString;
         }
     }
