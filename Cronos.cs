@@ -42,14 +42,16 @@ namespace Cronos
             //healthCheckTextBox.Text = cronosService.healthChecks();
 
             List<RichText> richTexts = new List<RichText>();
-            richTexts  = cronosService.healthChecks();
+
+            richTexts.AddRange(cronosService.healthChecks());
+            richTexts.AddRange(cronosService.processChecks());
+
             richTextBox1.Clear();
             foreach (RichText richText in richTexts) {
                 richTextBox1.SelectionColor = richText.color;
                 richTextBox1.AppendText(richText.text);
             }
 
-            
 
 
             timerSync();
@@ -67,6 +69,9 @@ namespace Cronos
             statusLabel.Text = "Awaiting";
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
